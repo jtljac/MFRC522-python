@@ -18,7 +18,7 @@ class EasyMFRC522:
             return None, None
         id = None
         while not id:
-            id, text = nonBlockingRead(sector)
+            id, text = self.nonBlockingRead(sector)
         return id, text
     
     def nonBlockingRead(self, sector):
