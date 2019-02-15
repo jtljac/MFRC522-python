@@ -37,7 +37,8 @@ class EasyMFRC522:
             return None, None
         data = []
         for i in range(0,2):
-            data.append(self.pointer.MFRC522_Read(sector*4 + i))
+            toRead = sector*4 + i
+            data.append(self.pointer.MFRC522_Read(toRead))
         self.pointer.MFRC522_StopCrypto1()
         if not data:
             return None, None
