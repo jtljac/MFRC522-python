@@ -2,7 +2,9 @@ MFRC522-python
 ==============
 A library built ontop of the MFRC522-Python library to make using it far simpler.
 
-inspired by https://github.com/pimylifeup/MFRC522-python
+Enables reading from and writing to specific sectors.
+
+Inspired by and based off https://github.com/pimylifeup/MFRC522-python
 
 ## Requirements
 This code requires you to have SPI-Py installed from the following repository:
