@@ -49,7 +49,7 @@ class EasyMFRC522:
                 text += chr(item)
         
         self.pointer.MFRC522_StopCrypto1()
-        return id, text
+        return id, text.strip(" ")
         
     def concatinateID(self, ID):
         id = ""
