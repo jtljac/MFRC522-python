@@ -32,20 +32,22 @@ class EasyMFRC522:
         
         self.pointer.MFRC522_SelectTag(uid)
         
-        status = self.pointer.MFRC522_Auth(self.pointer.PICC_AUTHENT1A, sector, self.key, uid)
+        status = self.pointer.MFRC522_Auth(self.pointer.PICC_AUTHENT1A, sector*4 + 3, self.key, uid)
         if status != self.pointer.MI_OK:
             return None, None
         data = []
         for i in range(0,2):
             toRead = sector*4 + i
             data.append(self.pointer.MFRC522_Read(toRead))
-        self.pointer.MFRC522_StopCrypto1()
+        
         if not data:
             return None, None
         text = ""
         for items in data:
             for item in items:
                 data += chr(item)
+        
+        self.pointer.MFRC522_StopCrypto1()
         return id, text
         
     def concatinateID(self, ID):
