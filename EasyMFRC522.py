@@ -46,7 +46,7 @@ class EasyMFRC522:
         text = ""
         for items in data:
             for item in items:
-                data += chr(item)
+                text += chr(item)
         
         self.pointer.MFRC522_StopCrypto1()
         return id, text
