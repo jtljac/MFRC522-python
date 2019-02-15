@@ -61,7 +61,7 @@ class EasyMFRC522:
             id = self.nonBlockingWrite(data, sector)
         
     def nonBlockingWrite(self, data, sector):
-        (status,TagType) = self.pointer.MFRC522_Request(MIFAREReader.PICC_REQIDL)
+        (status,TagType) = self.pointer.MFRC522_Request(self.pointer.PICC_REQIDL)
         if status != self.pointer.MI_OK:
             return None
         
@@ -71,7 +71,7 @@ class EasyMFRC522:
         id = self.concatinateID(uid)
         
         self.pointer.MFRC522_SelectTag(uid)
-        status = self.pointer.MFRC522_Auth(MIFAREReader.PICC_AUTHENT1A, sector*4 + 3, key, uid)
+        status = self.pointer.MFRC522_Auth(self.pointer.PICC_AUTHENT1A, sector*4 + 3, key, uid)
         if status != self.pointer.MI_OK:
             return None
         for i in range(0,2):
