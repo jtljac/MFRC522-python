@@ -40,7 +40,7 @@ class EasyMFRC522:
             toRead = sector*4 + i
             data.append(self.pointer.MFRC522_Read(toRead))
         
-        if not data:
+        if not data and not data[0]:
             return None, None
         print(data)
         text = ""
