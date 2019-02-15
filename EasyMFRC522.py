@@ -16,7 +16,7 @@ class EasyMFRC522:
         if sector == 0 or sector > 15:
             print("inaccessable sector")
             return None, None
-        id = None
+        id, text = self.nonBlockingRead(sector)
         while not id:
             id, text = self.nonBlockingRead(sector)
         return id, text
