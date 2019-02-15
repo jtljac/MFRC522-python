@@ -1,6 +1,7 @@
 MFRC522-python
 ==============
-A library built ontop of the MFRC522-Python library to make using it far simplar
+A library built ontop of the MFRC522-Python library to make using it far simpler.
+
 inspired by https://github.com/pimylifeup/MFRC522-python
 
 ## Requirements
