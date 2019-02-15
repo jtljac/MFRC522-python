@@ -52,7 +52,7 @@ class EasyMFRC522:
         return id, text.strip(" ")
     
     def write(self, text, sector):
-        if text.length > 48:
+        if len(text) > 48:
             print("Data is too large")
             return None
         data = bytearray(text.ljust(48).encode("ascii"))
