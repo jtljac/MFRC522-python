@@ -42,6 +42,7 @@ class EasyMFRC522:
         
         if not data:
             return None, None
+        print(data)
         text = ""
         for items in data:
             for item in items:
