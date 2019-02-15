@@ -71,7 +71,7 @@ class EasyMFRC522:
         id = self.concatinateID(uid)
         
         self.pointer.MFRC522_SelectTag(uid)
-        status = self.pointer.MFRC522_Auth(self.pointer.PICC_AUTHENT1A, sector*4 + 3, key, uid)
+        status = self.pointer.MFRC522_Auth(self.pointer.PICC_AUTHENT1A, sector*4 + 3, self.key, uid)
         if status != self.pointer.MI_OK:
             return None
         for i in range(0,2):
