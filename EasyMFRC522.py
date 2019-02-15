@@ -61,7 +61,7 @@ class EasyMFRC522:
             id = self.nonBlockingWrite(data, sector)
         
     def nonBlockingWrite(self, data, sector):
-        (status,TagType) = self.Pointer.MFRC522_Request(MIFAREReader.PICC_REQIDL)
+        (status,TagType) = self.pointer.MFRC522_Request(MIFAREReader.PICC_REQIDL)
         if status != self.pointer.MI_OK:
             return None
         
