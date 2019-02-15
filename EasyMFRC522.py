@@ -50,6 +50,34 @@ class EasyMFRC522:
         
         self.pointer.MFRC522_StopCrypto1()
         return id, text.strip(" ")
+    
+    def write(self, text, sector):
+        if text.length > 48:
+            print("Data is too large")
+            return None
+        data = bytearray(text.ljust(48).encode("ascii"))
+        id = self.nonBlockingWrite(data, sector)
+        while not id:
+            id = self.nonBlockingWrite(data, sector)
+        
+    def nonBlockingWrite(self, data, sector):
+        (status,TagType) = self.Pointer.MFRC522_Request(MIFAREReader.PICC_REQIDL)
+        if status != self.pointer.MI_OK:
+            return None
+        
+        (status,uid) = self.pointer.MFRC522_Anticoll()
+        if status != self.pointer.MI_OK:
+            return None
+        id = self.concatinateID(uid)
+        
+        self.pointer.MFRC522_SelectTag(uid)
+        status = self.pointer.MFRC522_Auth(MIFAREReader.PICC_AUTHENT1A, sector*4 + 3, key, uid)
+        if status != self.pointer.MI_OK:
+            return None
+        for i in range(0,2):
+            self.pointer.MFRC522_Write(sector*4 + i, data[(i*16):(i+1)*16])
+        self.pointer.MFRC522_StopCrypto1()
+        return id
         
     def concatinateID(self, ID):
         id = ""
