@@ -24,17 +24,17 @@ class EasyMFRC522:
     def nonBlockingRead(self, sector):
         (status,TagType) = self.pointer.MFRC522_Request(self.pointer.PICC_REQIDL)
         if status != self.pointer.MI_OK:
-            return None
+            return None, None
         (status,uid) = self.pointer.MFRC522_Anticoll()
         if status != self.pointer.MI_OK:
-            return None
+            return None, None
         id = self.concatinateID(uid)
         
         self.pointer.MFRC522_SelectTag(uid)
         
         status = self.pointer.MFRC522_Auth(self.pointer.PICC_AUTHENT1A, sector, self.key, uid)
         if status != self.pointer.MI_OK:
-            return None
+            return None, None
         data = []
         for i in range(0,3):
             data.append(self.pointer.MFRC522_Read(sector*4 + i))
