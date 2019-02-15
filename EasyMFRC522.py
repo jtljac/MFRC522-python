@@ -36,9 +36,11 @@ class EasyMFRC522:
         if status != self.pointer.MI_OK:
             return None, None
         data = []
-        for i in range(0,3):
+        for i in range(0,2):
             data.append(self.pointer.MFRC522_Read(sector*4 + i))
         self.pointer.MFRC522_StopCrypto1()
+        if not data:
+            return None, none
         text = ""
         for items in data:
             for item in items:
